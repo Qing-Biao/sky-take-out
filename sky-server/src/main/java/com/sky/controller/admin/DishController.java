@@ -37,7 +37,34 @@ public class DishController {
     @ApiOperation("新增菜品")
     public Result save(@RequestBody DishDTO dishDTO) {
         log.info("新增菜品：{}", dishDTO);
-        dishService.saveWithFlavor(dishDTO);//后绪步骤开发
+        //后绪步骤开发
+        dishService.saveWithFlavor(dishDTO);
+        return Result.success();
+    }
+
+    /**
+     * 菜品分页查询
+     * @param dishPageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("菜品分页查询")
+    public Result<PageResult> page(DishPageQueryDTO dishPageQueryDTO){
+        log.info("菜品分页查询：{}",dishPageQueryDTO);
+        PageResult pageResult=dishService.pageQuery(dishPageQueryDTO);
+        return Result.success(pageResult);
+    }
+
+    /**
+     * 菜品的批量删除
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("菜品的批量删除")
+    public Result delete(@RequestParam List<Long> ids){
+        log.info("菜品的批量删除:{}",ids);
+        dishService.deleteBatch(ids);
         return Result.success();
     }
 }
