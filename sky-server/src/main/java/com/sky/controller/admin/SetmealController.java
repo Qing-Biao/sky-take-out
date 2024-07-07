@@ -36,5 +36,15 @@ public class SetmealController {
         return Result.success();
     }
 
-
+    /**
+     * 套餐分页查询
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation(value = "套餐分页查询")
+    public Result<PageResult> page(SetmealPageQueryDTO setmealPageQueryDTO){
+        log.info("套餐分页查询:{}",setmealPageQueryDTO);
+        PageResult pageResult = setmealService.pageQuery(setmealPageQueryDTO);
+        return Result.success(pageResult);
+    }
 }

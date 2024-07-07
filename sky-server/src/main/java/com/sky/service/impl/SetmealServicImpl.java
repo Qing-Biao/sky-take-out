@@ -62,6 +62,20 @@ public class SetmealServicImpl implements SetmealService {
             //向菜单表中插入n条数据
             setmealDishMapper.insertBatch(setmealDishes);
         }
+
+
     }
 
+    /**
+     * 套餐分页查询
+     * @param setmealPageQueryDTO
+     * @return
+     */
+    public PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO) {
+        PageHelper.startPage(setmealPageQueryDTO.getPage(), setmealPageQueryDTO.getPageSize());
+        Page<SetmealVO> page=setmealDishMapper.pageQuery(setmealPageQueryDTO);
+        long total = page.getTotal();
+        List<SetmealVO> result = page.getResult();
+        return new PageResult(total,result);
+    }
 }

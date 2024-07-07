@@ -28,5 +28,10 @@ public interface SetmealDishMapper {
      */
     void insertBatch(List<SetmealDish> setmealDishes);
 
-
+    /**
+     * 套餐分页查询
+     * @param setmealPageQueryDTO
+     * @return
+     */
+    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
 }
