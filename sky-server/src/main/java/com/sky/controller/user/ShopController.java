@@ -19,7 +19,6 @@ public class ShopController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-
     /**
      * 获取店铺的营业状态
      * @retur

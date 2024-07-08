@@ -25,3 +25,4 @@ public class RedisConfiguration {
         return redisTemplate;
     }
 }
+
