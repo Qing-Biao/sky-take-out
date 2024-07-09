@@ -43,12 +43,19 @@ public interface DishService {
      */
     void updateWithFlavor(DishDTO dishDTO);
 
-    /**
-     * 根据分类id查询菜品
-     * @param categoryId
-     * @return
-     */
-    List<Dish> list(Long categoryId);
+//    /**
+//     * 根据分类id查询菜品
+//     * @param categoryId
+//     * @return
+//     */
+//    List<Dish> list(Long categoryId);
+//
+//    /**
+//     * 根据菜品名字查询菜品
+//     * @param dishName
+//     * @return
+//     */
+//    List<Dish> listByName(String dishName);
 
     /**
      * 菜品起售停售
@@ -56,4 +63,18 @@ public interface DishService {
      * @param id
      */
     void startOrStop(Integer status, Long id);
+
+    /**
+     * 条件查询菜品和口味
+     * @param dish
+     * @return
+     */
+    List<DishVO> listWithFlavor(Dish dish);
+
+    /**
+     * 根据id或姓名查询菜品
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
 }

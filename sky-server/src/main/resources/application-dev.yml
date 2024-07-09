@@ -11,6 +11,8 @@ sky:
     endpoint:
     access-key-id:
     access-key-secret:
+    bucket-name:
+
 
 
   redis:
@@ -18,3 +20,7 @@ sky:
     port: 6379
     password: "123456"
     database: 0
+
+  wechat:
+    appid:
+    secret:

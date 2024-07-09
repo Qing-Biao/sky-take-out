@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -166,17 +167,31 @@ public class DishServiceImpl implements DishService {
      * @param categoryId
      * @return
      */
-    public List<Dish> list(Long categoryId) {
+//    public List<Dish> list(Long categoryId) {
+//
+//        //构造查询条件 只有在启售的菜品才能被查出
+//        Dish dish = Dish.builder()
+//                .categoryId(categoryId)
+//                .status(StatusConstant.ENABLE)
+//                .build();
+//
+//        List<Dish> dishes = dishMapper.list(dish);
+//        return dishes;
+//    }
 
-        //构造查询条件 只有在启售的菜品才能被查出
+    /**
+     * 根据名称查询菜品
+     * @param dishName
+     * @return
+     */
+    /*public List<Dish> listByName(String dishName) {
         Dish dish = Dish.builder()
-                .categoryId(categoryId)
+                .name(dishName)
                 .status(StatusConstant.ENABLE)
                 .build();
+        return dishMapper.list(dish);
+    }*/
 
-        List<Dish> dishes = dishMapper.list(dish);
-        return dishes;
-    }
 
     /**
      * 菜品起售停售
@@ -196,5 +211,38 @@ public class DishServiceImpl implements DishService {
                 .status(status)
                 .build();
         dishMapper.update(dish);
+    }
+
+    /**
+     * 条件查询菜品和口味
+     * @param dish
+     * @return
+     */
+    public List<DishVO> listWithFlavor(Dish dish) {
+        List<Dish> dishList = dishMapper.list(dish);
+
+        List<DishVO> dishVOList = new ArrayList<>();
+
+        for (Dish d : dishList) {
+            DishVO dishVO = new DishVO();
+            BeanUtils.copyProperties(d,dishVO);
+
+            //根据菜品id查询对应的口味
+            List<DishFlavor> flavors = dishFlavorMapper.getByDishId(d.getId());
+
+            dishVO.setFlavors(flavors);
+            dishVOList.add(dishVO);
+        }
+
+        return dishVOList;
+    }
+
+    /**
+     * 根据条件查询菜品数据
+     * @param dish
+     * @return
+     */
+    public List<Dish> list(Dish dish) {
+        return dishMapper.list(dish);
     }
 }

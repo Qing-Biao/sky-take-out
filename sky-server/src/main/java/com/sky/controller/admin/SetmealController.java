@@ -62,12 +62,12 @@ public class SetmealController {
     }
 
     /**
-     * 根据id查询套餐
+     * 根据id查询套餐，用于修改页面回显数据
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-    @ApiOperation(value = "根据id查询套餐")
+    @ApiOperation(value = "根据套餐id查询套餐和菜品的关联关系")
     public Result<SetmealVO> getByIdWithDish(@PathVariable Long id){
         log.info("根据id查询套餐:{}",id);
         SetmealVO setmealVO = setmealService.getByIdWithDish(id);
