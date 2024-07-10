@@ -95,7 +95,7 @@ public class SetmealServicImpl implements SetmealService {
             Setmeal setmeal= setmealMapper.getById(id);
             //启售中的套餐不能被删除
             if(setmeal.getStatus()== StatusConstant.ENABLE){
-                throw new DeletionNotAllowedException(MessageConstant.DISH_ON_SALE);
+                throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
             }
 
         });
@@ -155,7 +155,7 @@ public class SetmealServicImpl implements SetmealService {
         List<Dish> dishList=dishMapper.getBySetmealId(id);
         dishList.forEach(dish -> {
             if(dish.getStatus()==StatusConstant.DISABLE){
-                throw new SetmealEnableFailedException(MessageConstant.SETDISH_DISABLE_FAILED);
+                throw new SetmealEnableFailedException(MessageConstant.SETMEAL_ENABLE_FAILED);
             }
         });
         Setmeal setmeal = Setmeal.builder()
