@@ -110,7 +110,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      * @param shoppingCartDTO
      * @return
      */
-    public void decreaseShoppingCart(ShoppingCartDTO shoppingCartDTO) {
+    public void subShoppingCart(ShoppingCartDTO shoppingCartDTO) {
         ShoppingCart shoppingCart = new ShoppingCart();
         BeanUtils.copyProperties(shoppingCartDTO, shoppingCart);
 
@@ -122,7 +122,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if(list!=null&&list.size()>0){
             ShoppingCart cart = list.get(0);
             if(cart.getNumber()==1){
-                shoppingCartMapper.delete(shoppingCart);
+                shoppingCartMapper.deleteById(cart.getId());
             }else{
                 cart.setNumber(cart.getNumber()-1);
                 shoppingCartMapper.updateNumberById(cart);

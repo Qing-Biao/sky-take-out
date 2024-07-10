@@ -43,8 +43,8 @@ public interface ShoppingCartMapper {
 
     /**|
      * 删除购物车的一条数据
-     * @param cart
+     * @param id
      */
-    void delete(ShoppingCart cart);
-
+    @Delete("delete from shopping_cart where id=#{id}")
+    void deleteById(Long id);
 }
