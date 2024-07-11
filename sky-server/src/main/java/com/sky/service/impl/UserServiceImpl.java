@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public User wxLongin(UserLoginDTO userLoginDTO) {
         String openid = getOpenid(userLoginDTO.getCode());
 
-        //判断openid 是否为空，如果为空表示登录异常，跑出业务异常
+        //判断openid 是否为空，如果为空表示登录异常，抛出业务异常
         if(openid==null){
             throw new LoginFailedException(MessageConstant.LOGIN_FAILED);
         }
@@ -51,10 +51,11 @@ public class UserServiceImpl implements UserService {
                     .openid(openid)
                     .createTime(LocalDateTime.now())
                     .build();
+            //如果是新用户，自动完成注册
             userMapper.insert(user);
         }
 
-        //如果是新用户，自动完成注册
+
 
         //返回用户对象
 
