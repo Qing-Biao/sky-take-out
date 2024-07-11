@@ -40,4 +40,17 @@ public class OrderController {
         return Result.success(pageResult);
     }
 
+
+    /**
+     * 各个状态的订单数量统计
+     */
+    @GetMapping("/statistics")
+    @ApiOperation("各个状态的订单数量统计")
+    public Result<OrderStatisticsVO> statistics() {
+        log.info("统计各个状态的订单数量");
+        OrderStatisticsVO orderStatisticsVO=orderService.statistics();
+        return Result.success(orderStatisticsVO);
+    }
+
+
 }
