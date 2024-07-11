@@ -66,7 +66,7 @@ public class OrderController {
     @ApiOperation("历史订单查询")
     public Result<PageResult> page(Integer page, Integer pageSize,Integer status){
         log.info("开始历史订单查询:{},{},{}",page,pageSize,status);
-        PageResult pageResult=orderService.pageQuery(page,pageSize,status);
+        PageResult pageResult=orderService.pageQuery4User(page,pageSize,status);
         return Result.success(pageResult);
     }
 
