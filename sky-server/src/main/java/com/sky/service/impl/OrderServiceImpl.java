@@ -420,6 +420,19 @@ public class OrderServiceImpl implements OrderService {
                 .status(Orders.DELIVERY_IN_PROGRESS).build();
         orderMapper.update(orders);
     }
+
+    /**
+     * 完成订单
+     * @param id
+     */
+    @Override
+    public void complete(Long id) {
+        Orders orders = Orders.builder()
+                .id(id)
+                .status(Orders.COMPLETED).build();
+        orderMapper.update(orders);
+    }
+
     /**
      * 拒单
      * @param ordersRejectionDTO
@@ -430,7 +443,5 @@ public class OrderServiceImpl implements OrderService {
                 .rejectionReason(ordersRejectionDTO.getRejectionReason()).build();
         orderMapper.update(orders);
     }
-
-
 
 }
