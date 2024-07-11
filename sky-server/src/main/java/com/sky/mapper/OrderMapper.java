@@ -79,4 +79,12 @@ public interface OrderMapper {
      */
     @Select("select count(*) from orders where status=#{status}")
     Integer getByStatus(Integer status);
+
+
+    /**
+     * 修改订单状态
+     * @param id
+     */
+    @Update("update orders set status=3 where id=#{id}")
+    void updateStatusById(Long id);
 }
