@@ -5,10 +5,7 @@ import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import com.sky.vo.OrderVO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
 
@@ -43,13 +40,6 @@ public interface OrderMapper {
             "where number = #{orderNumber}")
     void updateStatus(Integer orderStatus, Integer orderPaidStatus, LocalDateTime check_out_time, String orderNumber);
 
-
-    /**
-     * 分页条件查询并按下单时间排序
-     * @param ordersPageQueryDTO
-     */
-    Page<Orders> pageQuery4User(OrdersPageQueryDTO ordersPageQueryDTO);
-
     /**
      * 根据id查询订单
      * @param id
@@ -81,10 +71,4 @@ public interface OrderMapper {
     Integer getByStatus(Integer status);
 
 
-    /**
-     * 修改订单状态
-     * @param id
-     */
-    @Update("update orders set status=3 where id=#{id}")
-    void updateStatusById(Long id);
 }
