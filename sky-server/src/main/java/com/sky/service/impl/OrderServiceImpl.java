@@ -379,4 +379,25 @@ public class OrderServiceImpl implements OrderService {
         return String.join(" ", orderDishList);
     }
 
+    /**
+     * 各个状态的订单数量统计
+     * @return
+     */
+    public OrderStatisticsVO statistics() {
+
+        //待接单数量
+        Integer toBeConfirmed=orderMapper.getByStatus(Orders.TO_BE_CONFIRMED);
+
+        //待派送数量
+        Integer confirmed=orderMapper.getByStatus(Orders.DELIVERY_IN_PROGRESS);
+
+        //派送中数量
+        Integer deliveryInProgress=orderMapper.getByStatus(Orders.DELIVERY_IN_PROGRESS);
+
+        OrderStatisticsVO orderStatisticsVO = new OrderStatisticsVO();
+        orderStatisticsVO.setToBeConfirmed(toBeConfirmed);
+        orderStatisticsVO.setConfirmed(confirmed);
+        orderStatisticsVO.setDeliveryInProgress(deliveryInProgress);
+        return orderStatisticsVO;
+    }
 }
