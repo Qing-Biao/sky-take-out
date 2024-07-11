@@ -45,5 +45,13 @@ public interface OrderService{
      * @return
      */
     OrderVO details(Long id);
+
+
+    /**
+     * 再来一单
+     * @param id
+     * @return
+     */
+    void repetition(Long id);
 }
 
