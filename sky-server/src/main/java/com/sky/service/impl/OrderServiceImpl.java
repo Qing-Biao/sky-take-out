@@ -1,5 +1,6 @@
 package com.sky.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -443,12 +444,33 @@ public class OrderServiceImpl implements OrderService {
      * 完成订单
      * @param id
      */
-    @Override
     public void complete(Long id) {
         Orders orders = Orders.builder()
                 .id(id)
                 .status(Orders.COMPLETED).build();
         orderMapper.update(orders);
+    }
+
+    /**
+     * 客户催单
+     * @param id
+     */
+    public void reminder(Long id) {
+        //根据id查询订单
+        Orders ordersDB = orderMapper.getById(id);
+
+        //校验订单是否存在
+        if(ordersDB==null){
+            throw new OrderBusinessException(MessageConstant.ORDER_NOT_FOUND);
+        }
+
+        Map map = new HashMap();
+        map.put("type",2);
+        map.put("orderId",ordersDB.getId());
+        map.put("content","订单号"+ordersDB.getNumber());
+
+        String json = JSON.toJSONString(map);
+        webSocketServer.sendToAllClient(json);
     }
 
     /**
