@@ -6,8 +6,7 @@ import com.sky.mapper.OrderMapper;
 import com.sky.mapper.UserMapper;
 import com.sky.service.ReportService;
 import com.sky.vo.*;
-import jdk.vm.ci.meta.Local;
-import org.apache.poi.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,8 +67,8 @@ public class ReportServiceImpl implements ReportService {
 
         return TurnoverReportVO
                 .builder()
-                .dateList(StringUtil.join(",", dateList))
-                .turnoverList(StringUtil.join(",", turnoverList))
+                .dateList(StringUtils.join(dateList,"," ))
+                .turnoverList(StringUtils.join(turnoverList,","))
                 .build();
     }
 
@@ -115,9 +114,9 @@ public class ReportServiceImpl implements ReportService {
             newUserList.add(newUser);
         }
 
-        return UserReportVO.builder().dateList(StringUtil.join(",", dateList))
-                .newUserList(StringUtil.join(",", newUserList))
-                .totalUserList(StringUtil.join(",", totalUserList))
+        return UserReportVO.builder().dateList(StringUtils.join(dateList,"," ))
+                .newUserList(StringUtils.join(newUserList,","))
+                .totalUserList(StringUtils.join(totalUserList,","))
                 .build();
     }
 
@@ -176,10 +175,9 @@ public class ReportServiceImpl implements ReportService {
 
 
         return OrderReportVO.builder()
-                .dateList(StringUtil.join(",", dateList))
-                .dateList(StringUtil.join(",", dateList))
-                .orderCountList(StringUtil.join(",", orderCountList))
-                .validOrderCountList(StringUtil.join(",", validOrderCountList))
+                .dateList(StringUtils.join(dateList,","))
+                .orderCountList(StringUtils.join(orderCountList,","))
+                .validOrderCountList(StringUtils.join(validOrderCountList,","))
                 .totalOrderCount(totalOrderCount)
                 .validOrderCount(totalValidOrderCount)
                 .orderCompletionRate(orderCompletionRate)
@@ -200,10 +198,10 @@ public class ReportServiceImpl implements ReportService {
         List<GoodsSalesDTO> salesTop10 = orderMapper.getSalesTop10(beginTime, endTime);
 
         List<String> names = salesTop10.stream().map(GoodsSalesDTO::getName).collect(Collectors.toList());
-        String nameList = StringUtil.join(",", names);
+        String nameList = StringUtils.join(names,",");
 
         List<Integer> numbers = salesTop10.stream().map(GoodsSalesDTO::getNumber).collect(Collectors.toList());
-        String numberList = StringUtil.join(",", numbers);
+        String numberList = StringUtils.join(numbers,",");
 
         return SalesTop10ReportVO.builder()
                 .nameList(nameList)
