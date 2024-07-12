@@ -69,6 +69,7 @@
         order by order_time desc
     </select>
 
+
     <select id="sumByMap" resultType="java.lang.Double">
         select sum(amount) from orders
         <where>
@@ -83,6 +84,7 @@
             and status = #{status}
         </if>
         </where>
+
     </select>
 
 </mapper>

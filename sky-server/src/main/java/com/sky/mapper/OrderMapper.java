@@ -3,8 +3,6 @@ package com.sky.mapper;
 import com.github.pagehelper.Page;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
-import com.sky.vo.OrderVO;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
@@ -63,7 +61,6 @@ public interface OrderMapper {
      */
     Page<Orders> pageQuery(OrdersPageQueryDTO ordersPageQueryDTO);
 
-
     /**
      * 根据订单状态查找数量
      * @param status
@@ -75,7 +72,6 @@ public interface OrderMapper {
     //select * from orders where status =? and order_time < (当前时间-15分钟)
     @Select("select * from orders where status=#{status} and order_time<#{orderTime}")
     List<Orders> getByStatusAndOrderTimeLT(Integer status,LocalDateTime orderTime);
-
 
     /**
      * 根据动态条件统计营业额数据
